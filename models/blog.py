@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from models.post import Post
 from database import Database
 
 __author__="trunglv"
@@ -36,8 +37,8 @@ class Blog(object):
             'id': self.id
         }
 
-    @staticmethod
-    def get_from_mongo(cls, id):
+    @classmethod
+    def from_mongo(cls, id):
         blog_data = Database.find_one(collection='blogs', query={'id': id})
         return cls(author=blog_data['author'],
                     title=blog_data['title'],
